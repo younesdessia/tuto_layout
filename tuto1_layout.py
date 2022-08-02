@@ -8,7 +8,9 @@ import layout_3d.voxel as voxel
 import volmdlr as vm
 import volmdlr.primitives3d as primitives3d
 from dessia_api_client.users import PlatformUser
+from pathlib import Path
 
+DIR = Path(__file__).resolve().parent
 
 bx0 = primitives3d.Block(
     vm.Frame3D(vm.Point3D(0, 0, 0), vm.Vector3D(0.3, 0, 0), vm.Vector3D(0, 0.3, 0), vm.Vector3D(0, 0, 0.3)),
@@ -88,7 +90,10 @@ for i, basic in enumerate(basis.all_basis[0:10]):
 
         for cluster_selection in cluster_selections:
             cluster_selection1 = generator.refine_all_cluster(cluster_combination=cluster_selection)
-            cluster_selection1.babylonjs()
+            #cluster_selection1.babylonjs()
+
+            # print(dir(cluster_selection1))
+            cluster_selection1.save_babylonjs_to_file(filename='file')
     except:
         print('no cluster for {} rotation'.format(i))
 
